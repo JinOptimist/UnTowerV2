@@ -9,5 +9,6 @@ namespace Assets.Script
     public class ConstStore
     {
         public const string EnemyTag = "Enemy";
+        public const string GroundTag = "Ground"; 
     }
 }

@@ -6,14 +6,17 @@ public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody Rigidbody;
 
-    public float EnemyVelocity = 5;
+    public float EnemyVelocityMin = 5;
+    public float EnemyVelocityMax = 5;
 
     // Start is called before the first frame update
     void Start()
     {
-        var xVelocity = Random.value * EnemyVelocity * 2 - EnemyVelocity;
-        var zVelocity = Random.value * EnemyVelocity * 2 - EnemyVelocity;
-        Rigidbody.velocity = new Vector3(xVelocity, 0, zVelocity);
+        var xVelocity = Random.value * (EnemyVelocityMax - EnemyVelocityMin) + EnemyVelocityMin;
+        var zVelocity = Random.value * (EnemyVelocityMax - EnemyVelocityMin) + EnemyVelocityMin;
+        var v = new Vector3(xVelocity, 0, zVelocity);
+        //Rigidbody.velocity = v;
+        Rigidbody.AddForce(v);
     }
 
     // Update is called once per frame
