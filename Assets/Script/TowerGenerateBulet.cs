@@ -25,7 +25,7 @@ public class TowerGenerateBulet : MonoBehaviour
     private GameObject GenerateBullet()
     {
         var bullet = Instantiate(BulletTemplate);
-        bullet.transform.position = transform.position + new Vector3(0, 5, 0);
+        bullet.transform.position = transform.position + new Vector3(0, 3, 0);
         bullet.SetActive(true);
         Debug.Log($"Bullet generate: {bullet.transform.position}");
         return bullet;
