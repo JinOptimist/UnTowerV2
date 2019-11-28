@@ -11,19 +11,26 @@ namespace Assets.GameLogic
         private int Width;
         private int Height;
         private int BaseChanseOfCoin;
-        private bool ShowLabGeneration;
+        private Action<LabirinthLevel> RedrawFunc;
         private LabirinthLevel LabLevel;
         private List<Wall> WallsToDemolish = new List<Wall>();
         private List<Wall> FinishedWalls = new List<Wall>();
 
         private Random _rand = new Random();
 
-        public LabirinthGenerator(int width, int height, int chanseOfCoin = 20, bool showLabGeneration = false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="chanseOfCoin"></param>
+        /// <param name="redrawFunc">Func which will be called after each step of generation of level</param>
+        public LabirinthGenerator(int width, int height, int chanseOfCoin = 20, Action<LabirinthLevel> redrawFunc = null)
         {
             Width = width;
             Height = height;
             BaseChanseOfCoin = chanseOfCoin;
-            ShowLabGeneration = showLabGeneration;
+            RedrawFunc = redrawFunc;
         }
 
         /// <summary>
@@ -34,14 +41,14 @@ namespace Assets.GameLogic
         /// <returns></returns>
         public ILabirinthLevel GenerateLevel(int stairsX = 0, int stairsY = 0, int levelNumber = 0)
         {
-            if (levelNumber % 2 == 0)
-            {
-                Width++;
-            }
-            if (levelNumber % 3 == 0)
-            {
-                Height++;
-            }
+            //if (levelNumber % 2 == 0)
+            //{
+            //    Width++;
+            //}
+            //if (levelNumber % 3 == 0)
+            //{
+            //    Height++;
+            //}
 
             LabLevel = new LabirinthLevel(Width, Height);
             for (int y = 0; y < LabLevel.Height; y++)
@@ -130,10 +137,11 @@ namespace Assets.GameLogic
 
         private void RedrawLevel()
         {
-            if (ShowLabGeneration)
+            if (RedrawFunc != null)
             {
+                RedrawFunc(LabLevel);
                 //Drawer.DrawLabirinth(LabLevel, true);
-                Thread.Sleep(100);
+                //Thread.Sleep(100);
             }
         }
 
