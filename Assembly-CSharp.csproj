@@ -79,6 +79,7 @@
     <Compile Include="Assets\GameLogic\ILabirinthLevel.cs" />
     <Compile Include="Assets\GameLogic\LabirinthGenerator.cs" />
     <Compile Include="Assets\GameLogic\LabirinthLevel.cs" />
+    <Compile Include="Assets\HeroMovement.cs" />
     <Compile Include="Assets\Script\BulletCollision.cs" />
     <Compile Include="Assets\Script\CamerMovement.cs" />
     <Compile Include="Assets\Script\EnemyMovement.cs" />
