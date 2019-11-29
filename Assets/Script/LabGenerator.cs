@@ -8,6 +8,7 @@ using UnityEngine;
 public class LabGenerator : MonoBehaviour
 {
     public GameObject WallTemplate;
+    public GameObject CoinTemplate;
 
     public Material WallBorderMaterial;
     public Material GoldmineMaterial;
@@ -45,21 +46,29 @@ public class LabGenerator : MonoBehaviour
     {
         foreach (var cell in LabirinthLevel.AllCells())
         {
+            GameObject cellGameObject = null;
+            var dropHeight = 0f;
             if (cell is Wall)
             {
-                var wall = Instantiate(WallTemplate);
-                var dropHeight = (cell.X + cell.Y) * 0.1f;
-                wall.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
-                //wall.transform.localScale = wall.transform.localScale - (new Vector3(0, SpeedOfDrawLAb) * Time.deltaTime);
+                cellGameObject = Instantiate(WallTemplate);
             }
-            //else if (cell is Goldmine)
-            //{
-            //    var wall = Instantiate(WallTemplate);
-            //    var x = cell.X;
-            //    var z = cell.Y;
-            //    wall.transform.position = new Vector3(x, 0, z);
-            //    wall.GetComponent<Renderer>().material = GoldmineMaterial;
-            //}
+            else if (cell is Goldmine)
+            {
+                cellGameObject = GenerateGoldmine();
+            }
+            else if (cell is Coin)
+            {
+                cellGameObject = GenerateCoin();
+                dropHeight = (cell.X + cell.Y) * 0.2f;
+            }
+
+            if (cellGameObject != null)
+            {
+                cellGameObject.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
+            }
+            //var dropHeight = (cell.X + cell.Y) * 0.1f;
+            //wall.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
+            //wall.transform.localScale = wall.transform.localScale - (new Vector3(0, SpeedOfDrawLAb) * Time.deltaTime);
         }
     }
 
@@ -84,25 +93,39 @@ public class LabGenerator : MonoBehaviour
         //Add values -1 and +2 to create border
         for (int i = -1; i < Height + 1; i++)
         {
-            var rightBorder = GetWallBorder();
+            var rightBorder = GenerateWallBorder();
             rightBorder.transform.position = new Vector3(Width, 0, i);
-            var leftBorder = GetWallBorder();
+            var leftBorder = GenerateWallBorder();
             leftBorder.transform.position = new Vector3(-1, 0, i);
         }
 
         for (int i = 0; i < Width; i++)
         {
-            var topBorder = GetWallBorder();
+            var topBorder = GenerateWallBorder();
             topBorder.transform.position = new Vector3(i, 0, Height);
-            var bottomBorder = GetWallBorder();
+            var bottomBorder = GenerateWallBorder();
             bottomBorder.transform.position = new Vector3(i, 0, -1);
         }
     }
 
-    private GameObject GetWallBorder()
+    private GameObject GenerateWallBorder()
     {
         var wallBorder = Instantiate(WallTemplate);
         wallBorder.GetComponent<Renderer>().material = WallBorderMaterial;
         return wallBorder;
     }
+
+    private GameObject GenerateGoldmine()
+    {
+        var goldmine = Instantiate(WallTemplate);
+        goldmine.GetComponent<Renderer>().material = GoldmineMaterial;
+        return goldmine;
+    }
+
+    private GameObject GenerateCoin()
+    {
+        var coin = Instantiate(CoinTemplate);
+        return coin;
+    }
+    
 }

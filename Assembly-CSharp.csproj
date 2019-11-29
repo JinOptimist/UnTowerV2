@@ -79,11 +79,11 @@
     <Compile Include="Assets\GameLogic\ILabirinthLevel.cs" />
     <Compile Include="Assets\GameLogic\LabirinthGenerator.cs" />
     <Compile Include="Assets\GameLogic\LabirinthLevel.cs" />
-    <Compile Include="Assets\LabGenerator.cs" />
     <Compile Include="Assets\Script\BulletCollision.cs" />
     <Compile Include="Assets\Script\CamerMovement.cs" />
     <Compile Include="Assets\Script\EnemyMovement.cs" />
     <Compile Include="Assets\Script\EnemySpawnerScript.cs" />
+    <Compile Include="Assets\Script\LabGenerator.cs" />
     <Compile Include="Assets\Script\TowerGenerateBulet.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>E:/projectPrivate/UnTowerV2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
