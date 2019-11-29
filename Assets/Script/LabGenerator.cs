@@ -9,6 +9,7 @@ public class LabGenerator : MonoBehaviour
 {
     public GameObject WallTemplate;
     public GameObject CoinTemplate;
+    public GameObject DownTemplate;
 
     public Material WallBorderMaterial;
     public Material GoldmineMaterial;
@@ -59,6 +60,11 @@ public class LabGenerator : MonoBehaviour
             else if (cell is Coin)
             {
                 cellGameObject = GenerateCoin();
+                dropHeight = (cell.X + cell.Y) * 0.2f;
+            }
+            else if (cell is StairsDown)
+            {
+                cellGameObject = GenerateDown();
                 dropHeight = (cell.X + cell.Y) * 0.2f;
             }
 
@@ -127,5 +133,11 @@ public class LabGenerator : MonoBehaviour
         var coin = Instantiate(CoinTemplate);
         return coin;
     }
-    
+
+    private GameObject GenerateDown()
+    {
+        var down = Instantiate(DownTemplate);
+        return down;
+    }
+
 }
