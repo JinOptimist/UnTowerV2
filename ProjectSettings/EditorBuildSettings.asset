@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TowerDef.unity
-    guid: 2657292014dc8544cb04d484790ba4dd
-  - enabled: 1
     path: Assets/Scenes/Labirinth.unity
     guid: 6543a16c0aa8b214180e8fa9c55b8dc4
+  - enabled: 0
+    path: Assets/Scenes/TowerDef.unity
+    guid: 2657292014dc8544cb04d484790ba4dd
   m_configObjects: {}
