@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Assets.GameLogic
 {
-    public class LabirinthGenerator : ILabirinthGenerator
+    public class LabyrinthGenerator : ILabirinthGenerator
     {
         private int Width;
         private int Height;
@@ -25,7 +25,7 @@ namespace Assets.GameLogic
         /// <param name="height"></param>
         /// <param name="chanseOfCoin"></param>
         /// <param name="redrawFunc">Func which will be called after each step of generation of level</param>
-        public LabirinthGenerator(int width, int height, int chanseOfCoin = 20, Action<LabirinthLevel> redrawFunc = null)
+        public LabyrinthGenerator(int width, int height, int chanseOfCoin = 20, Action<LabirinthLevel> redrawFunc = null)
         {
             Width = width;
             Height = height;

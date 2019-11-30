@@ -4,48 +4,67 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LabGenerator : MonoBehaviour
 {
+    public GameObject Hero;
+
+    [Header("Templates")]
     public GameObject WallTemplate;
     public GameObject CoinTemplate;
     public GameObject DownTemplate;
 
+    [Header("Type of wall")]
     public Material WallBorderMaterial;
     public Material GoldmineMaterial;
 
+    [Header("Labyrinth parametrs")]
     public int Width;
     public int Height;
+    public int DepthOfCurrentLevel = 0;
+    [Header("UI")]
+    public Text LevelCountText;
 
-    public float SpeedOfDrawLAb = 0.1f;
+    //public float SpeedOfDrawLab = 0.1f;
 
-    public ILabirinthLevel LabirinthLevel;
-
-    private bool LabirinthStillUpdating = true;
+    private List<GameObject> ElementsOfLabyrinth = new List<GameObject>();
+    //private bool LabyrinthIsGenerating = false;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        GenerateBorder();
         //GenerateFullWallLevel();
-
-        LabirinthStillUpdating = true;
-
-        var labirinthGenerator = new LabirinthGenerator(Width, Height);
-        LabirinthLevel = labirinthGenerator.GenerateLevel();
-        DrawLabirinth();
+        GenerateLabyrinth();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        //LabirinthStillUpdating = false;
     }
 
-    private void DrawLabirinth()
+    /// <summary>
+    /// Generate new labyrinth level. You could set coordinate starting point of labyrinth
+    /// </summary>
+    /// <param name="startingPointX"></param>
+    /// <param name="startingPointY"></param>
+    /// <param name="labyrinthWidth"></param>
+    /// <param name="labyrinthHeight"></param>
+    public void GenerateLabyrinth(int startingPointX = 0, int startingPointY = 0, int? labyrinthWidth = null, int? labyrinthHeight = null)
     {
-        foreach (var cell in LabirinthLevel.AllCells())
+        ElementsOfLabyrinth?.ForEach(Destroy);
+
+        Width = labyrinthWidth ?? Width;
+        Height = labyrinthHeight ?? Height;
+        Width++;
+        Height++;
+        DepthOfCurrentLevel++;
+        LevelCountText.text = (DepthOfCurrentLevel).ToString();
+
+        var labyrinthGenerator = new LabyrinthGenerator(Width, Height);
+        var labyrinthLevel = labyrinthGenerator.GenerateLevel(startingPointX, startingPointY, DepthOfCurrentLevel);
+        foreach (var cell in labyrinthLevel.AllCells())
         {
             GameObject cellGameObject = null;
             var dropHeight = 0f;
@@ -66,16 +85,21 @@ public class LabGenerator : MonoBehaviour
             {
                 cellGameObject = GenerateDown();
                 dropHeight = (cell.X + cell.Y) * 0.2f;
+
+                Hero.GetComponent<HeroMovement>().StairsDown = cellGameObject;
             }
 
             if (cellGameObject != null)
             {
                 cellGameObject.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
+                ElementsOfLabyrinth.Add(cellGameObject);
             }
             //var dropHeight = (cell.X + cell.Y) * 0.1f;
             //wall.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
             //wall.transform.localScale = wall.transform.localScale - (new Vector3(0, SpeedOfDrawLAb) * Time.deltaTime);
         }
+
+        GenerateBorder();
     }
 
     //private void GenerateFullWallLevel()
@@ -89,14 +113,13 @@ public class LabGenerator : MonoBehaviour
     //            wall.transform.position = new Vector3(x, 0, z);
     //            row.Add(wall);
     //        }
-
     //        AllWalls.Add(row);
     //    }
     //}
 
     private void GenerateBorder()
     {
-        //Add values -1 and +2 to create border
+        //Add values -1 and +1 to border creating
         for (int i = -1; i < Height + 1; i++)
         {
             var rightBorder = GenerateWallBorder();
@@ -118,6 +141,7 @@ public class LabGenerator : MonoBehaviour
     {
         var wallBorder = Instantiate(WallTemplate);
         wallBorder.GetComponent<Renderer>().material = WallBorderMaterial;
+        ElementsOfLabyrinth.Add(wallBorder);
         return wallBorder;
     }
 

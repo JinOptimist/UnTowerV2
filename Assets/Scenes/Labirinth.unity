@@ -376,8 +376,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5, z: 1}
-  m_Center: {x: 0, y: 0.7545445, z: 0}
+  m_Size: {x: 1, y: 1.5, z: 0.5980072}
+  m_Center: {x: 0, y: 0.7545445, z: -0.0036945343}
 --- !u!1 &231601051
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,6 +745,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FreeCameraMovement: 0
+  Hero: {fileID: 1979869960}
+  SensitivityX: 30
 --- !u!1 &802078188
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +854,7 @@ GameObject:
   - component: {fileID: 1166355973}
   m_Layer: 0
   m_Name: WallTemplate
-  m_TagString: Untagged
+  m_TagString: PartOfLabyrinth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -975,14 +977,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53cf4c9404a90d459d6fb33e8977657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hero: {fileID: 1979869960}
   WallTemplate: {fileID: 1166355968}
   CoinTemplate: {fileID: 174511557}
   DownTemplate: {fileID: 198299054}
   WallBorderMaterial: {fileID: 2100000, guid: 53c5ffe345900df4fa7d049616b52a09, type: 2}
   GoldmineMaterial: {fileID: 2100000, guid: 71e9a6627c63dfe448d160be0428e51a, type: 2}
-  Width: 40
-  Height: 40
-  SpeedOfDrawLAb: 0.4
+  Width: 10
+  Height: 10
 --- !u!4 &1287711082
 Transform:
   m_ObjectHideFlags: 0
@@ -1191,12 +1193,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 3ee943a14c78cb5449c8660df11094bd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.865
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 3ee943a14c78cb5449c8660df11094bd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 3ee943a14c78cb5449c8660df11094bd,
         type: 3}
@@ -1242,6 +1244,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 3ee943a14c78cb5449c8660df11094bd,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 3ee943a14c78cb5449c8660df11094bd,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 3ee943a14c78cb5449c8660df11094bd,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 3ee943a14c78cb5449c8660df11094bd,
         type: 3}
@@ -1777,6 +1794,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 750510631}
+  StairsDown: {fileID: 0}
+  LabGenerator: {fileID: 1287711081}
   HeroSpeed: 4
   CoinCountText: {fileID: 713119729}
 --- !u!1 &2068273743
