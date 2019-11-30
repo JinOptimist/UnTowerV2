@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HeroMovement : MonoBehaviour
 {
+    public GameObject Camera;
+
     public float HeroSpeed = 1f;
     public Text CoinCountText;
 
@@ -20,30 +22,30 @@ public class HeroMovement : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
     }
 
+    //private void FixedUpdate()
     // Update is called once per frame
     void Update()
-    //private void FixedUpdate()
+    {
+        SetVelocityToHero();
+
+        CalculatedAnimationVariable();
+
+        Camera.transform.position = transform.position + new Vector3(0, 4, -3.5f);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            CoinCountText.text = (++HeroCoin).ToString();
+            Destroy(collision.gameObject);
+        }
+    }
+
+    private void CalculatedAnimationVariable()
     {
         var lookUp = Animator.GetBool("LookUp");
         var lookRight = Animator.GetBool("LookRight");
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            Rigidbody.velocity = new Vector3(0, 0, 1) * HeroSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            Rigidbody.velocity = new Vector3(0, 0, -1) * HeroSpeed;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            Rigidbody.velocity = new Vector3(-1, 0, 0) * HeroSpeed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            Rigidbody.velocity = new Vector3(1, 0, 0) * HeroSpeed;
-        }
 
         if (Input.GetKey(KeyCode.W)
             || Input.GetKey(KeyCode.S))
@@ -77,12 +79,24 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void SetVelocityToHero()
     {
-        if (collision.gameObject.CompareTag("Coin"))
+        if (Input.GetKey(KeyCode.W))
         {
-            CoinCountText.text = (++HeroCoin).ToString();
-            Destroy(collision.gameObject);
+            Rigidbody.velocity = new Vector3(0, 0, 1) * HeroSpeed;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            Rigidbody.velocity = new Vector3(0, 0, -1) * HeroSpeed;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            Rigidbody.velocity = new Vector3(-1, 0, 0) * HeroSpeed;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            Rigidbody.velocity = new Vector3(1, 0, 0) * HeroSpeed;
         }
     }
 }
