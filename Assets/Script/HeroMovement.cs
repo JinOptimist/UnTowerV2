@@ -7,20 +7,15 @@ public class HeroMovement : MonoBehaviour
 {
     public GameObject Camera;
     public GameObject StairsDown;
+    public HeroStuff HeroStuff;
 
     public LabGenerator LabGenerator;
 
     public float HeroSpeed = 1f;
 
-    [Header("UI elements")]
-    public Text CoinCountText;
-
     Animator Animator;
     Rigidbody Rigidbody;
 
-    
-    private int HeroCoin = 0;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +31,7 @@ public class HeroMovement : MonoBehaviour
         CalculatedAnimationVariable();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
@@ -47,8 +42,7 @@ public class HeroMovement : MonoBehaviour
             //After that, the Hero can go through the Coin
             Destroy(coin.GetComponent<Rigidbody>());
             Destroy(coin.GetComponent<CapsuleCollider>());
-
-            CoinCountText.text = (++HeroCoin).ToString();
+            HeroStuff.HeroGetCoin();
         }
 
         if (collision.gameObject == StairsDown)

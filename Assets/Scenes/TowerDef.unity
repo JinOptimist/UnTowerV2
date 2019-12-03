@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -593,6 +593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0226c97a56a15dd4283796081bcffb75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FreeCameraMovement: 0
+  Hero: {fileID: 0}
+  SensitivityX: 30
 --- !u!1 &571929029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2809363733457997367, guid: cece2d695550d8d42af571048f331575,
@@ -922,7 +925,7 @@ PrefabInstance:
     - target: {fileID: 5987837732374953132, guid: daf263d4f9aca3e4f81126211b1c89c9,
         type: 3}
       propertyPath: CooldownOfRespawn
-      value: 0.4
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daf263d4f9aca3e4f81126211b1c89c9, type: 3}
