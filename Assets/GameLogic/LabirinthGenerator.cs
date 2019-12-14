@@ -33,6 +33,25 @@ namespace Assets.GameLogic
             RedrawFunc = redrawFunc;
         }
 
+        public ILabirinthLevel GenerateStoreLevel(int levelNumber = 0)
+        {
+            LabLevel = new LabirinthLevel(Width, Height);
+            for (int y = 0; y < LabLevel.Height; y++)
+            {
+                var row = new List<BaseCellObject>();
+                for (int x = 0; x < LabLevel.Width; x++)
+                {
+                    var wall = new Wall(x, y);
+                    row.Add(wall);
+                }
+                LabLevel.Cells.Add(row);
+            }
+
+            LabLevel[0, 0] = new StairsDown(0, 0);
+
+            return LabLevel;
+        }
+
         /// <summary>
         /// Generate new labirinth level
         /// </summary>

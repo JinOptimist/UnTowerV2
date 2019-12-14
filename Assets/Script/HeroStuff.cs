@@ -9,21 +9,13 @@ public class HeroStuff : MonoBehaviour
     public Text CoinCountText;
     private int HeroCoin = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Skills")]
+    public bool CouldMineGold = false;
+    public bool CouldBrokeWall = false;
 
-    // Update is called once per frame
-    void Update()
+    public void HeroGetCoins(int countOfCoins = 1)
     {
-        
-    }
-
-    public void HeroGetCoin(int countOfCoin = 1)
-    {
-        HeroCoin += countOfCoin;
+        HeroCoin += countOfCoins;
         CoinCountText.text = HeroCoin.ToString();
     }
 }

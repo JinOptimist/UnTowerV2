@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WallType { Border, BaseWall, Goldmine };
+public enum WallType { Border, BaseWall, Goldmine }
 
 public class WallMining : MonoBehaviour
 {
@@ -39,20 +39,30 @@ public class WallMining : MonoBehaviour
         switch (WallType)
         {
             case WallType.Goldmine:
-                HeroStuff.HeroGetCoin(3);
+                if (!HeroStuff.CouldMineGold)
+                {
+                    return;
+                }
+
+                HeroStuff.HeroGetCoins(3);
                 step = new Vector3(0, 0, 0.35f);
                 break;
             case WallType.BaseWall:
+                if (!HeroStuff.CouldBrokeWall)
+                {
+                    return;
+                }
+
                 step = new Vector3(0, 0, 0.11f);
                 break;
         }
 
         transform.localScale -= step;
-        transform.position += step / 2;
-
         if (transform.localScale.z <= 0)
         {
             Destroy(transform.gameObject);
         }
+
+        transform.position += step / 2;
     }
 }
