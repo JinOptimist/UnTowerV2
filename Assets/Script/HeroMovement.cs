@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Assets.Script;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HeroMovement : MonoBehaviour
@@ -33,7 +35,8 @@ public class HeroMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Coin"))
+
+        if (collision.gameObject.CompareTag(ConstStore.CoinTag))
         {
             var coin = collision.gameObject;
             //After animation coin will be destroyed
@@ -42,11 +45,18 @@ public class HeroMovement : MonoBehaviour
             //After that, the Hero can go through the Coin
             Destroy(coin.GetComponent<Rigidbody>());
             Destroy(coin.GetComponent<CapsuleCollider>());
-            HeroStuff.HeroGetCoin();
+            HeroStuff.HeroGetCoins();
         }
 
         if (collision.gameObject == StairsDown)
         {
+            //Each 5 level is a store
+            if (LabGenerator.DepthOfCurrentLevel % 2 == 0)
+            {
+                SceneManager.LoadScene("Store");
+                return;
+            }
+
             var heroX = Mathf.RoundToInt(transform.position.x);
             var heroZ = Mathf.RoundToInt(transform.position.z);
             transform.position = new Vector3(heroX, 0, heroZ);
