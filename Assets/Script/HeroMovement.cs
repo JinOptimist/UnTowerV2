@@ -1,4 +1,5 @@
 ﻿using Assets.Script;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,11 +32,16 @@ public class HeroMovement : MonoBehaviour
         SetVelocityToHero();
 
         CalculatedAnimationVariable();
+
+        //Debug only
+        if (Input.GetKey(KeyCode.Delete))
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.CompareTag(ConstStore.CoinTag))
         {
             var coin = collision.gameObject;
@@ -50,9 +56,18 @@ public class HeroMovement : MonoBehaviour
 
         if (collision.gameObject == StairsDown)
         {
-            //Each 5 level is a store
+            if (SceneManager.GetActiveScene().name == "Store")
+            {
+                HeroStuff.Save();
+                SceneManager.LoadScene("Labirinth");
+                return;
+            }
+
+            //Each X level is a store
             if (LabGenerator.DepthOfCurrentLevel % 2 == 0)
             {
+                PlayerPrefs.SetInt("DepthOfCurrentLevel", LabGenerator.DepthOfCurrentLevel);
+                HeroStuff.Save();
                 SceneManager.LoadScene("Store");
                 return;
             }

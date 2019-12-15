@@ -472,9 +472,10 @@ GameObject:
   - component: {fileID: 8296139530979869660}
   - component: {fileID: 8296139530979869663}
   - component: {fileID: 8296139530979869658}
-  - component: {fileID: 8296139530979869659}
   - component: {fileID: 8296139530979869656}
+  - component: {fileID: 8296139530979869659}
   - component: {fileID: 8296139530979869657}
+  - component: {fileID: 1979869961}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -550,23 +551,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8296139530979869659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296139530979869662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49021e76e0cf5294cbd7494c2a33c506, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 0}
-  StairsDown: {fileID: 0}
-  HeroStuff: {fileID: 8296139530979869657}
-  LabGenerator: {fileID: 0}
-  HeroSpeed: 4
 --- !u!108 &8296139530979869656
 Light:
   m_ObjectHideFlags: 0
@@ -627,6 +611,23 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &8296139530979869659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296139530979869662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49021e76e0cf5294cbd7494c2a33c506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 0}
+  StairsDown: {fileID: 0}
+  HeroStuff: {fileID: 8296139530979869657}
+  LabGenerator: {fileID: 0}
+  HeroSpeed: 4
 --- !u!114 &8296139530979869657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,6 +643,20 @@ MonoBehaviour:
   CoinCountText: {fileID: 0}
   CouldMineGold: 0
   CouldBrokeWall: 0
+  InitialHeroCoin: 20
+--- !u!114 &1979869961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296139530979869662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59302cd57033ead498ab4be2a6af818a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistnaceOfInteract: 2
 --- !u!1 &8296139531386230293
 GameObject:
   m_ObjectHideFlags: 0

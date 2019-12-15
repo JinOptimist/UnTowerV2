@@ -35,6 +35,13 @@ public class LabGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DepthOfCurrentLevel = PlayerPrefs.GetInt("DepthOfCurrentLevel", 0);
+        if (DepthOfCurrentLevel > 0)
+        {
+            Width += DepthOfCurrentLevel;
+            Height += DepthOfCurrentLevel;
+        }
+
         //GenerateFullWallLevel();
         GenerateLabyrinth();
     }
