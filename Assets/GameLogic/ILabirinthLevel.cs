@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assets.GameLogic
 {
-    public interface ILabirinthLevel
+    public interface ILabyrinthLevel
     {
         List<List<BaseCellObject>> Cells { get; set; }
         int Width { get; }

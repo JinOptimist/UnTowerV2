@@ -64,7 +64,7 @@ public class HeroMovement : MonoBehaviour
             }
 
             //Each X level is a store
-            if (LabGenerator.DepthOfCurrentLevel % 2 == 0)
+            if (LabGenerator.DepthOfCurrentLevel % 10 == 0)
             {
                 PlayerPrefs.SetInt("DepthOfCurrentLevel", LabGenerator.DepthOfCurrentLevel);
                 HeroStuff.Save();

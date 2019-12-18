@@ -8,8 +8,8 @@ namespace Assets.GameLogic
 {
     public interface ILabirinthGenerator
     {
-        ILabirinthLevel GenerateLevel(int stairsX = 0, int stairsY = 0, int levelNumber = 0);
+        ILabyrinthLevel GenerateLevel(int stairsX = 0, int stairsY = 0, int levelNumber = 0);
 
-        ILabirinthLevel GenerateStoreLevel(int levelNumber = 0);
+        ILabyrinthLevel GenerateStoreLevel(int levelNumber = 0);
     }
 }

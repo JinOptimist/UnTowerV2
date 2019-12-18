@@ -6,7 +6,7 @@ using Assets.GameLogic.CellObject;
 
 namespace Assets.GameLogic
 {
-    public class LabirinthLevel : ILabirinthLevel
+    public class LabirinthLevel : ILabyrinthLevel
     {
         public List<List<BaseCellObject>> Cells { get; set; }
         public int Width { get; private set; }

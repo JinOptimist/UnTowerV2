@@ -33,7 +33,7 @@ namespace Assets.GameLogic
             RedrawFunc = redrawFunc;
         }
 
-        public ILabirinthLevel GenerateStoreLevel(int levelNumber = 0)
+        public ILabyrinthLevel GenerateStoreLevel(int levelNumber = 0)
         {
             LabLevel = new LabirinthLevel(Width, Height);
             for (int y = 0; y < LabLevel.Height; y++)
@@ -58,7 +58,7 @@ namespace Assets.GameLogic
         /// <param name="stairsX">X Coordinate for stairs to up</param>
         /// <param name="stairsY">Y Coordinate for stairs to up</param>
         /// <returns></returns>
-        public ILabirinthLevel GenerateLevel(int stairsX = 0, int stairsY = 0, int levelNumber = 0)
+        public ILabyrinthLevel GenerateLevel(int stairsX = 0, int stairsY = 0, int levelNumber = 0)
         {
             //if (levelNumber % 2 == 0)
             //{

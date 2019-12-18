@@ -4,7 +4,7 @@ namespace Assets.GameLogic
 {
     public interface IDungeon
     {
-        ILabirinthLevel CurrentLevel { get; }
+        ILabyrinthLevel CurrentLevel { get; }
         int CurrentLevelNumber { get; }
         int Width { get; }
         int Height { get; }

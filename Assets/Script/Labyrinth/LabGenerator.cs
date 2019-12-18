@@ -3,6 +3,8 @@ using Assets.GameLogic.CellObject;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,14 +25,21 @@ public class LabGenerator : MonoBehaviour
     public int Width;
     public int Height;
     public int DepthOfCurrentLevel = 0;
+
+    /// <summary>
+    /// Count of second which we need to full grow a wall
+    /// </summary>
+    public float SpeedOfDrawLab = 0.5f;
+    private bool GrowingWallDone = false;
+    private const int CountOfStepForGrowWall = 100;
+
     [Header("UI")]
     public Text LevelCountText;
 
-    //public float SpeedOfDrawLab = 0.1f;
-
     private List<GameObject> ElementsOfLabyrinth = new List<GameObject>();
+    private List<GameObject> Walls = new List<GameObject>();
+    private ILabyrinthLevel LabyrinthLevel;
     //private bool LabyrinthIsGenerating = false;
-
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +58,28 @@ public class LabGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GrowingWallDone)
+        {
+            return;
+        }
+
+        IEnumerable<BaseCellObject> walls = LabyrinthLevel.AllCells().OfType<Wall>().ToList();
+        walls = walls.Concat(LabyrinthLevel.AllCells().OfType<Goldmine>()).ToList();
+        
+        foreach (var cell in walls)
+        {
+            var wall = Walls.FirstOrDefault(x => x.transform.position.x == cell.X && x.transform.position.z == cell.Y);
+
+            var localScale = wall.transform.localScale;
+            localScale.y = cell.Height;
+            wall.transform.localScale = localScale;
+
+            var position = wall.transform.position;
+            position.y = -0.5f + cell.Height / 2;
+            wall.transform.position = position;
+        }
+
+        GrowingWallDone = !walls.Any(x => x.Height < 1);
     }
 
     /// <summary>
@@ -60,7 +91,11 @@ public class LabGenerator : MonoBehaviour
     /// <param name="labyrinthHeight"></param>
     public void GenerateLabyrinth(int startingPointX = 0, int startingPointY = 0, int? labyrinthWidth = null, int? labyrinthHeight = null)
     {
+        //Remove element of old labyrinth
         ElementsOfLabyrinth?.ForEach(Destroy);
+        ElementsOfLabyrinth = new List<GameObject>();
+        Walls = new List<GameObject>();
+        GrowingWallDone = false;
 
         Width = labyrinthWidth ?? Width;
         Height = labyrinthHeight ?? Height;
@@ -70,18 +105,24 @@ public class LabGenerator : MonoBehaviour
         LevelCountText.text = (DepthOfCurrentLevel).ToString();
 
         var labyrinthGenerator = new LabyrinthGenerator(Width, Height);
-        var labyrinthLevel = labyrinthGenerator.GenerateLevel(startingPointX, startingPointY, DepthOfCurrentLevel);
-        foreach (var cell in labyrinthLevel.AllCells())
+        LabyrinthLevel = labyrinthGenerator.GenerateLevel(startingPointX, startingPointY, DepthOfCurrentLevel);
+
+        var wallCells = new List<BaseCellObject>();
+        foreach (var cell in LabyrinthLevel.AllCells())
         {
             GameObject cellGameObject = null;
             var dropHeight = 0f;
             if (cell is Wall)
             {
                 cellGameObject = Instantiate(WallTemplate);
+                Walls.Add(cellGameObject);
+                wallCells.Add(cell);
             }
             else if (cell is Goldmine)
             {
                 cellGameObject = GenerateGoldmine();
+                Walls.Add(cellGameObject);
+                wallCells.Add(cell);
             }
             else if (cell is Coin)
             {
@@ -101,28 +142,15 @@ public class LabGenerator : MonoBehaviour
                 cellGameObject.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
                 ElementsOfLabyrinth.Add(cellGameObject);
             }
-            //var dropHeight = (cell.X + cell.Y) * 0.1f;
-            //wall.transform.position = new Vector3(cell.X, dropHeight, cell.Y);
-            //wall.transform.localScale = wall.transform.localScale - (new Vector3(0, SpeedOfDrawLAb) * Time.deltaTime);
         }
+
+        var heroPosition = Hero.transform.position;
+        wallCells
+            .OrderBy(cell => Vector3.Distance(new Vector3(cell.X, 0, cell.Y), heroPosition)).ToList()
+            .ForEach(cell => new Task(() => GrowWall(cell, heroPosition)).Start());
 
         GenerateBorder();
     }
-
-    //private void GenerateFullWallLevel()
-    //{
-    //    for (int z = 0; z < Height; z++)
-    //    {
-    //        var row = new List<GameObject>();
-    //        for (int x = 0; x < Width; x++)
-    //        {
-    //            var wall = Instantiate(WallTemplate);
-    //            wall.transform.position = new Vector3(x, 0, z);
-    //            row.Add(wall);
-    //        }
-    //        AllWalls.Add(row);
-    //    }
-    //}
 
     private void GenerateBorder()
     {
@@ -173,4 +201,21 @@ public class LabGenerator : MonoBehaviour
         return down;
     }
 
+    private void GrowWall(BaseCellObject wall, Vector3 heroPosition)
+    {
+        wall.Height = 0.01f;
+
+        var distance = Mathf.RoundToInt(Vector3.Distance(heroPosition, new Vector3(wall.X, 0, wall.Y)));
+
+        Thread.Sleep(100 * distance);
+        while (wall.Height < 1)
+        {
+            wall.Height += 1 / (float)CountOfStepForGrowWall;
+
+            var waitSecond = Mathf.RoundToInt(1000 * SpeedOfDrawLab / CountOfStepForGrowWall);
+            Thread.Sleep(waitSecond);
+        }
+
+        wall.Height = 1;
+    }
 }

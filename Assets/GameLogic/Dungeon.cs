@@ -10,10 +10,10 @@ namespace Assets.GameLogic
 {
     public class Dungeon : IDungeon
     {
-        public ILabirinthLevel CurrentLevel { get; private set; }
+        public ILabyrinthLevel CurrentLevel { get; private set; }
         public int CurrentLevelNumber { get; private set; } = -1;
 
-        private List<ILabirinthLevel> Levels { get; set; }
+        private List<ILabyrinthLevel> Levels { get; set; }
         private ILabirinthGenerator Generator { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
@@ -26,7 +26,7 @@ namespace Assets.GameLogic
             Height = height;
             //Generator = new LabirinthGenerator(width, height, showLabGeneration: showLabGeneration);
             Generator = labirinthGenerator;
-            Levels = new List<ILabirinthLevel>();
+            Levels = new List<ILabyrinthLevel>();
             GoDown();
         }
 

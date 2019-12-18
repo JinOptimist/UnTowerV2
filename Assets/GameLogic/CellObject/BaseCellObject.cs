@@ -16,6 +16,9 @@ namespace Assets.GameLogic.CellObject
 
         public int X { get; set; }
         public int Y { get; set; }
+
+        public float Height { get; set; }
+
         public char Chapter { get; set; }
         public ConsoleColor Color { get; set; }
         public string DescAction { get; set; }

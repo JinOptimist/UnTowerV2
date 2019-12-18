@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.039215688, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.1
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -464,7 +464,8 @@ MonoBehaviour:
   GoldmineMaterial: {fileID: 2100000, guid: 71e9a6627c63dfe448d160be0428e51a, type: 2}
   Width: 2
   Height: 2
-  DepthOfCurrentLevel: 0
+  DepthOfCurrentLevel: 10
+  SpeedOfDrawLab: 1
   LevelCountText: {fileID: 1797370102}
 --- !u!4 &1287711082
 Transform:
@@ -1109,6 +1110,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1979869961, guid: 5b5e47e86862384439bd3ddf582a53ac, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8296139530979869657, guid: 5b5e47e86862384439bd3ddf582a53ac,
         type: 3}
       propertyPath: CoinCountText
