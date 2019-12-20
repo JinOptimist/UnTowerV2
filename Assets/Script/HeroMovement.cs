@@ -16,6 +16,8 @@ public class HeroMovement : MonoBehaviour
 
     public float HeroSpeed = 1f;
 
+    public float LookAngel = 0;
+
     Animator Animator;
     Rigidbody Rigidbody;
 
@@ -42,18 +44,6 @@ public class HeroMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(ConstStore.CoinTag))
-        {
-            var coin = collision.gameObject;
-            //After animation coin will be destroyed
-            coin.GetComponent<Animator>().Play("CoinDestroy");
-            //Remove a few components from coin object. 
-            //After that, the Hero can go through the Coin
-            Destroy(coin.GetComponent<Rigidbody>());
-            Destroy(coin.GetComponent<CapsuleCollider>());
-            HeroStuff.HeroGetCoins();
-        }
-
         if (collision.gameObject == StairsDown)
         {
             if (SceneManager.GetActiveScene().name == "Store")
@@ -64,7 +54,7 @@ public class HeroMovement : MonoBehaviour
             }
 
             //Each X level is a store
-            if (LabGenerator.DepthOfCurrentLevel % 10 == 0)
+            if (LabGenerator.DepthOfCurrentLevel % 5 == 0)
             {
                 PlayerPrefs.SetInt("DepthOfCurrentLevel", LabGenerator.DepthOfCurrentLevel);
                 HeroStuff.Save();
@@ -142,5 +132,8 @@ public class HeroMovement : MonoBehaviour
         {
             Rigidbody.velocity += new Vector3(1, 0, 0) * HeroSpeed;
         }
+
+
+        Rigidbody.velocity = Quaternion.Euler(0, LookAngel, 0) * Rigidbody.velocity;
     }
 }

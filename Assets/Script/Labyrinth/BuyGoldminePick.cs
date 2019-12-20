@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class BuyGoldminePick : MonoBehaviour, ICanBeInteracted
 {
-    public int priceOfPick = 1;
+    public int PriceOfPick = 1;
+
+    public bool IsAutoInteracted => false;
 
     public void Interact(HeroStuff whoInteract)
     {
-        if (whoInteract.HeroSpendCoins(priceOfPick))
+        if (whoInteract.HeroSpendCoins(PriceOfPick))
         {
             whoInteract.CouldMineGold = true;
         }

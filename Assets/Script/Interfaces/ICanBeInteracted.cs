@@ -11,5 +11,7 @@ namespace Assets.Script.Interfaces
         void Interact(HeroStuff whoInteract);
         void SelectAsActive();
         void DeselectAsActive();
+
+        bool IsAutoInteracted { get; }
     }
 }

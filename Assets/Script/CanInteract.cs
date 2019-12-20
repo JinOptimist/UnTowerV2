@@ -1,4 +1,5 @@
-﻿using Assets.Script.Interfaces;
+﻿using Assets.Script;
+using Assets.Script.Interfaces;
 using Assets.Utility;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,19 @@ public class CanInteract : MonoBehaviour
             && ActiveObjToInteract != null)
         {
             GetICanBeInteracted().Interact(HeroStuff);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        var script = InterfaceUtility.GetMonoBehaviourImplementTheInterface<ICanBeInteracted>(collision.gameObject);
+        if (script != null)
+        {
+            var canBeInteracted = script as ICanBeInteracted;
+            if (canBeInteracted.IsAutoInteracted)
+            {
+                canBeInteracted.Interact(HeroStuff);
+            }
         }
     }
 
