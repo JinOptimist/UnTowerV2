@@ -16,7 +16,7 @@ public class HeroMovement : MonoBehaviour
 
     public float HeroSpeed = 1f;
 
-    public float LookAngel = 0;
+    public float LookAngel { get; private set; } = 0;
 
     Animator Animator;
     Rigidbody Rigidbody;
@@ -73,33 +73,39 @@ public class HeroMovement : MonoBehaviour
 
     private void CalculatedAnimationVariable()
     {
-        var lookUp = Animator.GetBool("LookUp");
-        var lookRight = Animator.GetBool("LookRight");
+        //var lookUp = Animator.GetBool("LookUp");
+        //var lookRight = Animator.GetBool("LookRight");
+
+        //if (Input.GetKey(KeyCode.W)
+        //    || Input.GetKey(KeyCode.S))
+        //{
+        //    if (lookRight)
+        //    {
+        //        Animator.SetTrigger("TurnAround");
+        //    }
+
+        //    Animator.SetBool("KeepGoing", true);
+        //    Animator.SetBool("LookUp", true);
+        //    Animator.SetBool("LookRight", false);
+        //}
+
+        //if (Input.GetKey(KeyCode.A)
+        //    || Input.GetKey(KeyCode.D))
+        //{
+        //    if (lookUp)
+        //    {
+        //        Animator.SetTrigger("TurnAround");
+        //    }
+
+        //    Animator.SetBool("KeepGoing", true);
+        //    Animator.SetBool("LookUp", false);
+        //    Animator.SetBool("LookRight", true);
+        //}
 
         if (Input.GetKey(KeyCode.W)
             || Input.GetKey(KeyCode.S))
         {
-            if (lookRight)
-            {
-                Animator.SetTrigger("TurnAround");
-            }
-
             Animator.SetBool("KeepGoing", true);
-            Animator.SetBool("LookUp", true);
-            Animator.SetBool("LookRight", false);
-        }
-
-        if (Input.GetKey(KeyCode.A)
-            || Input.GetKey(KeyCode.D))
-        {
-            if (lookUp)
-            {
-                Animator.SetTrigger("TurnAround");
-            }
-
-            Animator.SetBool("KeepGoing", true);
-            Animator.SetBool("LookUp", false);
-            Animator.SetBool("LookRight", true);
         }
 
         if (!Input.anyKey)
@@ -108,10 +114,16 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
+    public void RotateHero(float angle)
+    {
+        LookAngel += angle;
+        transform.eulerAngles = new Vector3(0, LookAngel, 0);
+    }
+
     private void SetVelocityToHero()
     {
         Rigidbody.velocity = new Vector3(0, 0, 0);
-        if (Input.GetKey(KeyCode.W) 
+        if (Input.GetKey(KeyCode.W)
             || Input.GetKey(KeyCode.UpArrow))
         {
             Rigidbody.velocity = new Vector3(0, 0, 1) * HeroSpeed;

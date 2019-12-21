@@ -1527,6 +1527,11 @@ PrefabInstance:
       propertyPath: CoinCountText
       value: 
       objectReference: {fileID: 713119729}
+    - target: {fileID: 8296139530979869658, guid: 5b5e47e86862384439bd3ddf582a53ac,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8296139530979869659, guid: 5b5e47e86862384439bd3ddf582a53ac,
         type: 3}
       propertyPath: Camera
@@ -1537,6 +1542,16 @@ PrefabInstance:
       propertyPath: LabGenerator
       value: 
       objectReference: {fileID: 1287711081}
+    - target: {fileID: 8296139530979869660, guid: 5b5e47e86862384439bd3ddf582a53ac,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296139530979869660, guid: 5b5e47e86862384439bd3ddf582a53ac,
+        type: 3}
+      propertyPath: m_Mass
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8296139530979869661, guid: 5b5e47e86862384439bd3ddf582a53ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1596,6 +1611,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296139530979869663, guid: 5b5e47e86862384439bd3ddf582a53ac,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 1.0484152
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296139530979869663, guid: 5b5e47e86862384439bd3ddf582a53ac,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.0065652533
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b5e47e86862384439bd3ddf582a53ac, type: 3}

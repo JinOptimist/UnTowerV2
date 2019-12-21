@@ -13,8 +13,7 @@ public class MinimapCameraFollowing : MonoBehaviour
     void Update()
     {
         var heroPosition = Hero.transform.position;
-        heroPosition.y = Height;
-        transform.position = heroPosition;
+        transform.position = new Vector3(heroPosition.x, Height, heroPosition.z);
     }
 
     //Disable fog for minimap

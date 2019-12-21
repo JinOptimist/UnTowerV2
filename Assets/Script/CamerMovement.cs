@@ -80,7 +80,7 @@ public class CamerMovement : MonoBehaviour
     {
         transform.RotateAround(Hero.transform.position, Vector3.up, angel);
         var heroMovement = Hero.GetComponent<HeroMovement>();
-        heroMovement.LookAngel += angel;
+        heroMovement.RotateHero(angel);
         DefaultCameraRotation = transform.rotation;
 
         MinimapCamera.transform.eulerAngles = new Vector3(90, heroMovement.LookAngel, 0);
