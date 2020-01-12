@@ -25,12 +25,13 @@ namespace Assets.GameLogic
         /// <param name="height"></param>
         /// <param name="chanseOfCoin"></param>
         /// <param name="redrawFunc">Func which will be called after each step of generation of level</param>
-        public LabyrinthGenerator(int width, int height, int chanseOfCoin = 20, Action<LabirinthLevel> redrawFunc = null)
+        public LabyrinthGenerator(int width, int height, int chanseOfCoin = 20, Action<LabirinthLevel> redrawFunc = null, int? seed = null)
         {
             Width = width;
             Height = height;
             BaseChanseOfCoin = chanseOfCoin;
             RedrawFunc = redrawFunc;
+            _rand = seed.HasValue ? new Random(seed.Value) : new Random();
         }
 
         public ILabyrinthLevel GenerateStoreLevel(int levelNumber = 0)

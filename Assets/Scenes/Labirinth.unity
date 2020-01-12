@@ -865,8 +865,8 @@ MonoBehaviour:
   DownTemplate: {fileID: 198299054}
   WallBorderMaterial: {fileID: 2100000, guid: 53c5ffe345900df4fa7d049616b52a09, type: 2}
   GoldmineMaterial: {fileID: 2100000, guid: 71e9a6627c63dfe448d160be0428e51a, type: 2}
-  Width: 2
-  Height: 2
+  Width: 20
+  Height: 20
   DepthOfCurrentLevel: 10
   SpeedOfDrawLab: 1
   LevelCountText: {fileID: 1797370102}
